@@ -18,7 +18,7 @@
 		C08798431E4BB2C900E20460 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08798421E4BB2C900E20460 /* InfoView.swift */; };
 		C08798451E4BB93200E20460 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08798441E4BB93200E20460 /* InfoTableViewCell.swift */; };
 		C08798471E4CA46900E20460 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08798461E4CA46900E20460 /* APIClient.swift */; };
-		C08798491E4CA5C200E20460 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08798481E4CA5C200E20460 /* Secrets.swift */; };
+		C087984D1E4CC5B200E20460 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087984C1E4CC5B200E20460 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		C08798421E4BB2C900E20460 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C08798441E4BB93200E20460 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		C08798461E4CA46900E20460 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		C08798481E4CA5C200E20460 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		C087984C1E4CC5B200E20460 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 			children = (
 				C08798391E4B94AC00E20460 /* Project.swift */,
 				C08798461E4CA46900E20460 /* APIClient.swift */,
-				C08798481E4CA5C200E20460 /* Secrets.swift */,
+				C087984C1E4CC5B200E20460 /* Secrets.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -182,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C087983C1E4B968100E20460 /* AllProjectsTableViewCell.swift in Sources */,
-				C08798491E4CA5C200E20460 /* Secrets.swift in Sources */,
+				C087984D1E4CC5B200E20460 /* Secrets.swift in Sources */,
 				C08798451E4BB93200E20460 /* InfoTableViewCell.swift in Sources */,
 				C08798381E4B931400E20460 /* AllProjectsView.swift in Sources */,
 				C08798281E4B905700E20460 /* AllProjectsViewController.swift in Sources */,
