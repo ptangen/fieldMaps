@@ -11,10 +11,10 @@ import Foundation
 class Project {
     
     let name: String
-    let number: Int
+    let number: String
     let location: String
     
-    init(name: String, number: Int, location: String) {
+    init(name: String, number: String, location: String) {
         self.name = name
         self.number = number
         self.location = location

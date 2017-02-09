@@ -28,8 +28,9 @@ class AllProjectsViewController: UIViewController, AllProjectsViewDelegate {
         self.title = "NEWFORMA"
     }
     
-    func openInfoView() {
+    func openInfoView(project: Project) {
         let infoViewControllerInst = InfoViewController()
+        infoViewControllerInst.infoViewInst.selectedProject = project
         navigationController?.pushViewController(infoViewControllerInst, animated: false) // show destination with nav bar
     }
 

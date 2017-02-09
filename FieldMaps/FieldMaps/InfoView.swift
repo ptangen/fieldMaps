@@ -12,11 +12,9 @@ import MapKit
 class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate {
 
     let infoTableViewInst = UITableView()
-    let name = (label: "Name", value: "Anderson - New Home")
-    let number = (label: "Number", value: "314")
-    let location = (label: "Location" , value:"10 Slalom Drive, Grantham, NH")
-    var projectDesc = [(label: String(), value: String())]
+    var selectedProject: Project?
     var mapViewInst = MKMapView()
+    var projectDesc = [(label: String(), value: String())]
     
     override init(frame:CGRect){
         super.init(frame: frame)
@@ -24,26 +22,45 @@ class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDel
         self.infoTableViewInst.dataSource = self
         self.infoTableViewInst.register(InfoTableViewCell.self, forCellReuseIdentifier: "prototype")
         
-        projectDesc = [self.name, self.number, self.location]
-        self.pageLayout()
-        
         self.mapViewInst.delegate = self
-        let mapCenter = CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.416667)
-        let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: mapCenter, span: mapSpan)
-        self.mapViewInst.setRegion(region, animated: false)
-        self.addPin()
+        self.pageLayout()
+    }
+    
+    func drawMap(){
+        self.getCoordinates(address: (self.selectedProject?.location)!, completion: { (lat, long) in
+            if let unwrappedLat = lat, let unwrappedLong = long {
+                DispatchQueue.main.async {
+                    let mapCenter = CLLocationCoordinate2D(latitude: unwrappedLat, longitude: unwrappedLong)
+                    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    let region = MKCoordinateRegion(center: mapCenter, span: mapSpan)
+                    self.mapViewInst.setRegion(region, animated: false)
+                    self.addPin(lat: unwrappedLat, long: unwrappedLong)
+                }
+            }
+        })
+    }
+    
+    func getTableViewData(){
+        // use the project object to build an array for the tableview
+        if let project = self.selectedProject {
+            let name = (label: "Name", value: project.name)
+            let number = (label: "Number", value: project.number)
+            let location = (label: "Location" , value:project.location)
+            self.projectDesc = [name, number, location]
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func addPin() {
+    func addPin(lat: Double, long: Double ) {
         let annotation = MKPointAnnotation()
-        let locationCoordinate = CLLocationCoordinate2D(latitude: 37.779560, longitude: -122.393027)
+        let locationCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         annotation.coordinate = locationCoordinate
-        annotation.title = "Founders Den"
+        if let project = self.selectedProject {
+            annotation.title = project.name
+        }
         self.mapViewInst.addAnnotation(annotation)
     }
     
@@ -51,6 +68,26 @@ class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDel
         if let annotation = view.annotation {
             if let title = annotation.title! {
                 print("Tapped \(title) pin")
+            }
+        }
+    }
+    
+    func getCoordinates(address:String, completion:@escaping (CLLocationDegrees?, CLLocationDegrees?)->Void) {
+        APIClient.getLocationJSON(address: address) { (json) in
+            guard let unwrappedJSON = json else { return }
+            let results = unwrappedJSON["results"] as? [[String:Any]]
+            guard let unwrappedResults = results else { return }
+            
+            for unwrappedDictionary in unwrappedResults {
+                let geometry = unwrappedDictionary["geometry"] as? [String:Any]
+                if let unwrappedGeometry = geometry {
+                    let location = unwrappedGeometry["location"] as? [String:Any]
+                    if let unwrappedLocation = location {
+                        let lat = unwrappedLocation["lat"] as? CLLocationDegrees
+                        let long = unwrappedLocation["lng"] as? CLLocationDegrees
+                        completion(lat, long)
+                    }
+                }
             }
         }
     }
