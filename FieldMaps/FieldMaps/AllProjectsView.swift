@@ -16,17 +16,26 @@ class AllProjectsView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     weak var delegate: AllProjectsViewDelegate?
     let allProjectsTableViewInst = UITableView()
+    let tableViewLabel = UILabel()
     let project1 = Project(name: "Anderson - New Home", number: "314", location: "24 Summit Drive, Grantham, NH")
     let project2 = Project(name: "Jackson - Remodel", number: "791", location: "10 Slalom Drive, Grantham, NH")
     var projects = [Project]()
 
     override init(frame:CGRect){
         super.init(frame: frame)
+        projects = [self.project1, project2]
+        
         self.allProjectsTableViewInst.delegate = self
         self.allProjectsTableViewInst.dataSource = self
         self.allProjectsTableViewInst.register(AllProjectsTableViewCell.self, forCellReuseIdentifier: "prototype")
-        
-        projects = [self.project1, project2]
+        let borderGray = UIColor(colorLiteralRed: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
+        self.allProjectsTableViewInst.layer.borderWidth = 1.0;
+        self.allProjectsTableViewInst.layer.borderColor = borderGray.cgColor;
+
+        self.tableViewLabel.text = "PROJECTS"
+        self.tableViewLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(12.0))
+        let labelGray = UIColor(colorLiteralRed: 109/255, green: 109/255, blue: 109/255, alpha: 1.0)
+        self.tableViewLabel.textColor = labelGray
         self.pageLayout()
     }
     
@@ -35,13 +44,20 @@ class AllProjectsView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func pageLayout() {
+        
+        // tableViewLabel
+        self.addSubview(self.tableViewLabel)
+        self.tableViewLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.tableViewLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
+        self.tableViewLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        
         // allProjectsTableViewInst
         self.addSubview(self.allProjectsTableViewInst)
         self.allProjectsTableViewInst.translatesAutoresizingMaskIntoConstraints = false
-        self.allProjectsTableViewInst.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        self.allProjectsTableViewInst.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50).isActive = true
+        self.allProjectsTableViewInst.topAnchor.constraint(equalTo: self.topAnchor, constant: 48).isActive = true
         self.allProjectsTableViewInst.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         self.allProjectsTableViewInst.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        // height anchor set in the viewController
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,7 +65,7 @@ class AllProjectsView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 48
+        return 56
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,10 +80,6 @@ class AllProjectsView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//       
-//    }
     
     func onClickInfoButton(sender: UIButton) {
         if let row = sender.accessibilityLabel, let delegate = self.delegate {

@@ -96,10 +96,12 @@ class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDel
         // infoTableViewInst
         self.addSubview(self.infoTableViewInst)
         self.infoTableViewInst.translatesAutoresizingMaskIntoConstraints = false
-        self.infoTableViewInst.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        self.infoTableViewInst.heightAnchor.constraint(equalToConstant: 208).isActive = true
+        self.infoTableViewInst.topAnchor.constraint(equalTo: self.topAnchor, constant: 48).isActive = true
         self.infoTableViewInst.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         self.infoTableViewInst.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        let borderGray = UIColor(colorLiteralRed: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
+        self.infoTableViewInst.layer.borderWidth = 1.0;
+        self.infoTableViewInst.layer.borderColor = borderGray.cgColor;
         
         // mapViewInst
         self.addSubview(self.mapViewInst)
@@ -108,7 +110,6 @@ class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDel
         self.mapViewInst.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.mapViewInst.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         self.mapViewInst.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        self.mapViewInst.backgroundColor = UIColor.green
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,7 +117,7 @@ class InfoView: UIView, UITableViewDataSource, UITableViewDelegate, MKMapViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 48
+        return 56
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -19,17 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // set nav bar colors
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = UIColor.orange
-        navigationBarAppearance.barTintColor = UIColor.orange
+        let newformaOrange = UIColor(colorLiteralRed: 236/255, green: 152/255, blue: 35/255, alpha: 1.0)
+        navigationBarAppearance.tintColor = newformaOrange
+        navigationBarAppearance.barTintColor = newformaOrange
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
-        statusBarBackground.backgroundColor = UIColor.orange
-        UIApplication.shared.statusBarStyle = .lightContent // sets status bar text color white
         
         let allProjectsViewControllerInst = AllProjectsViewController()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if let window = self.window {
-            window.backgroundColor = UIColor.white
+            let backgroundGray = UIColor(colorLiteralRed: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
+            window.backgroundColor = backgroundGray
             let navigationController = UINavigationController(rootViewController: allProjectsViewControllerInst)
             navigationController.view.addSubview(statusBarBackground)
             navigationController.navigationBar.tintColor = UIColor.white

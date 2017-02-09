@@ -10,6 +10,7 @@ import Foundation
 
 class APIClient {
     
+    // pass in the address and the geocode API return lat and long
     class func getLocationJSON(address:String, completion:@escaping ([String:Any]?)->Void) {
         if let addressEncoded = address.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             let urlString = "https://maps.googleapis.com/maps/api/geocode/json?address=\(addressEncoded)&key=\(Secrets.apiKey)"

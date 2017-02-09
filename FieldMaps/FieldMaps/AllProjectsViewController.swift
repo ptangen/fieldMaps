@@ -15,7 +15,7 @@ class AllProjectsViewController: UIViewController, AllProjectsViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.allProjectsViewInst.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        self.edgesForExtendedLayout = []   // prevents view from siding under nav bar
     }
     
     override func loadView(){
@@ -26,6 +26,14 @@ class AllProjectsViewController: UIViewController, AllProjectsViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "NEWFORMA"
+        self.navigationItem.setHidesBackButton(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let contentSize = self.allProjectsViewInst.allProjectsTableViewInst.contentSize.height
+        self.allProjectsViewInst.allProjectsTableViewInst.heightAnchor.constraint(equalToConstant: contentSize).isActive = true
+        self.allProjectsViewInst.allProjectsTableViewInst.reloadData()
     }
     
     func openInfoView(project: Project) {

@@ -33,9 +33,9 @@ class InfoTableViewCell: UITableViewCell {
         //subTitleLabel
         contentView.addSubview(valueLabel)
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        valueLabel.font = UIFont(name: "Helvetica Neue", size: CGFloat(18.0))
+        valueLabel.font = UIFont(name: "Helvetica Neue", size: CGFloat(16.0))
         
-        valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -6).isActive = true
+        valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12).isActive = true
         valueLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         valueLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -53).isActive = true
     }
