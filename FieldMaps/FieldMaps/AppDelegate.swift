@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.tintColor = newformaOrange
         navigationBarAppearance.barTintColor = newformaOrange
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
         
         let allProjectsViewControllerInst = AllProjectsViewController()
         
